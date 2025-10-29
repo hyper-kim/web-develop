@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+
+<style>
+    h1{
+        background-color: rgba(129, 247, 247, 0.4);
+    }
+    .box{
+        background-color: #f7dc81
+    }
+    h5{
+        background-color: rgba(255,255,255,0.3);
+    }
+</style>
+
+{% include 'nav.html' %}
+
+<div>
+    <h1>
+        {{memory.title}}
+    </h1>
+    <br>
+    <div class="box">
+        <p>
+            <h3>{{memory.username}}</h3>
+        </p>
+        <p>
+            업로드 날짜: {{memory.upload_date}}
+        </p>    
+        <p>
+            수정한 날짜: {{memory.update_date}}
+        </p>
+   
+
+            {% for photo in memory.photo_set.all %}
+                <img src="{{photo.image.url}}" width="300"><br>
+            {% endfor %}
+            <br>
+        <h5>
+            {{memory.body}}
+        </h5>
+        <h3>
+            {{memory.user_tag}}
+        </h3>
+        <h3>
+            {{memory.hash_tag}}
+        </h3>    
+    </div>
+    
+    
+
+</div>
+<!---->
+<div>
+    {% if user.username == memory.username %}
+    <!-- <button class="btn btn-sm" onclick="location.href='crud/{{ memory.id }}/edit/'">수정</button> -->
+    <a href = "{% url 'delete' memory.id %}" class="btn btn-info">삭제</a>
+    {% endif %}
+</div>
+{% endblock %}

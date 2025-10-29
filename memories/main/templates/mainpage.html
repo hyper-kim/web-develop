@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+
+<style>
+    .card{
+        background-color: #f5ca56;
+    }
+    h2{
+        background-color: rgba(255,255,255,0.5);
+    }
+</style>
+
+{% include 'nav.html' %}
+
+    <center>
+        <div>
+            <img src="media/images/8.png" width="950" height="500" alt="image errors">
+        </div>
+        <br><br><br>
+        {% for memory in memories.all %}
+            <br><br>
+            <div class="card border-dark mb-3"><!--사진 가운데 정렬 됐음-->
+                <div class="card-header"><h2>{{ memory.title }}</h2></div>
+                 <p class="card-text"><h3>{{memory.username}}</h3></p>
+                <div class="card-body text-dark">
+                    {% for photo in memory.photo_set.all|slice:":1" %}
+                    <img src="{{photo.image.url}}" width="300"><br>
+                    {% endfor %}
+                    <p class="card-text"><small class="text-muted"><h4>업로드 날짜: {{memory.upload_date}}</h4></small></p>
+                    <p class="card-text"><small class="text-muted"><h4>수정한 날짜: {{memory.update_date}}</h4></small></p>
+                   
+                    <p class="card-text"><h3>{{memory.hash_tag}}</h3></p>
+                    <p class="card-text">{{memory.summary}}...</p>
+
+                    <a href = "{% url 'detail' memory.id %}" class="btn btn-info">details</a>
+                
+            <br><br>
+        {% endfor %}
+        
+    </center>
+
+<p>
+    by 이다혜 기말 끝나고 좀 보자(HSHS 1603,1604,1608,1619)
+</p>
+
+
+{% endblock %}

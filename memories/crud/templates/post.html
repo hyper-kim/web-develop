@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}
+{% endblock %}
+
+{% block content %}
+    {% include 'nav.html' %}
+    <form method="POST" action="{% url 'create'%}" enctype="multipart/form-data">
+        {% csrf_token %}
+            <input class="form-group form-control-lg" type="text" name="title" id="title"  placeholder="제목">
+            <br>
+            <textarea  class="form-group" placeholder="내용" name="body" id="body" cols="30" rows="10"></textarea>
+            <div class="form-group">
+                <label for="picture">사진</label>
+                <input type="file" id="pictures" name="pictures" accept="image/*" multiple>
+            <div class="form-group">
+                <label for="user_tag">유저태그</label><br>
+                <textarea name="user_tag" id="user_tag" cols="10" rows="1"></textarea>
+            </div>
+            <div class="form-group" style="float: left; verticle-align: center;">
+                <label for="hash_tag">해시태그</label><br>
+                <textarea name="hash_tag" id="hash_tag" cols="10" rows="1"></textarea>
+                <input name="username" type="hidden" class="username" value="{{user.username}}">
+            </div>
+            <div class="form-group" style="float: left; input-align: middle;">
+                    <input type="submit" value="글쓰기">
+            </div>
+{% endblock %}
+<span class="form-group" style="float: left;">
+            <label for="body">내용</label><br>
+            <input name="body" id="body" cols="30" rows="10">
+            </input>
+        </span>
+<div class="form-group" style="float: left; input-align: middle;">
+            <input type="submit" value="글쓰기">
+        </div>
+            <div class="form-group" style="float: left; verticle-align: center;">
+class="form-group"

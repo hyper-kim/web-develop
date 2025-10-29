@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+
+{% include 'nav.html' %}
+
+
+<h1>Search Result</h1>
+<br>
+
+{% for memory in memories %}
+    <div class="card mb-3" style="max-width: 1000px;">
+        <div class="row no-gutters">
+            <div class="col-md-4">
+                {% for photo in memory.photo_set.all|slice:":1" %}
+                    <img src="{{photo.image.url}}" width="300"><br>
+                {% endfor %}
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h2 class="card-title">{{ memory.title }}</h2>
+                <p class="card-text"><h5>{{memory.username}}</h5></p>
+                    <p class="card-text"><small class="text-muted"><h4>업로드 날짜: {{memory.upload_date}}</h4></small></p>
+                    <p class="card-text"><small class="text-muted"><h4>수정한 날짜: {{memory.update_date}}</h4></small></p>
+                    
+                    <p class="card-text"><h5>{{memory.hash_tag}}</h5></p>
+                    <p class="card-text">{{memory.summary}}...</p>
+                    <a href = "{% url 'detail' memory.id %}" class="btn btn-info">details</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% empty %}
+<h4>검색 결과가 없습니다.</h4>
+{% endfor %}
+
+<!--<form action="." method="post"> {% csrf_token %}
+    {{ memories }}
+</form>
+
+{% if object_list %}
+    {% for post in object_list %}
+        <h2><a href='{{ post.get_absolute_url }}'>{{ post.title }}</a></h2>
+        {{ post.modify_date|date:"N d, Y" }}
+        <p>{{ post.description }}</p>
+    {% endfor %}
+{% elif search_term %}
+    <b><i>Search Word({{ search_term }}) Not Found</i></b>
+{% endif %}-->
+
+{% endblock %}
